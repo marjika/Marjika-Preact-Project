@@ -24,8 +24,7 @@ class Game extends Component {
             letters.push(this.state.letters[randomLetters[i]]);
         }
         //const letters = this.state.letters.filter(letter => letter.points<4);
-        
-        console.log(letters);
+
         this.setState({letters: letters});
     }
     
