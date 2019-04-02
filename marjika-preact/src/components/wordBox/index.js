@@ -2,7 +2,7 @@ import { h } from 'preact';
 import './style';
 
 const WordBox = props => (
-	<div className='displayWord'>
+	<div class='displayWord'>
         <h1>Your word: {props.word}</h1>
 		<h1>Word value: {props.points}</h1>
 		

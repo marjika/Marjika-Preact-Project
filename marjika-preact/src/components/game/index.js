@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import style from './style';
 import Board from '../board';
 import letters from './letters.json';

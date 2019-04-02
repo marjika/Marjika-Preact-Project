@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { Component } from 'preact';
 import style from './style';
 import Tile from '../tile';
 import WordBox from '../wordBox'
@@ -8,15 +8,18 @@ class Board extends Component {
     state={
         letters : this.props.letters,
         pointTotal : 0,
-        wordString : ""
+        wordString : "",
+        nextArray : []
     };
 
-    recordLetter = letter => {
-        //console.log(letter.points);
+    recordLetter = (letter, arr) => {
+        console.log(arr);
         const pointTotal = this.state.pointTotal + letter.points;
         const wordString = this.state.wordString + letter.value;
+        const nextArray = arr;
         this.setState({pointTotal : pointTotal});
         this.setState({wordString : wordString});
+        this.setState({nextArray : nextArray});
         //console.log(pointTotal);
     }
 
@@ -30,23 +33,36 @@ class Board extends Component {
                         maxWidth: '50%',
                         height: '100%'
                     }}
-                >
+                >   
                     {this.props.letters.map((letter, index) => (
-                        <Tile 
-                            key={index}
-                            id={index}
-                            value={letter.value}
-                            points={letter.points}
-                            letterClicked={this.letterClicked}
-                            color={'aqua'}
-                            recordLetter={this.recordLetter}
-                        ></Tile>
+                        <div class={style.boggleTile} >                   
+                            {this.state.nextArray.includes(index) &&
+                                <Tile 
+                                    key={index}
+                                    id={index}
+                                    value={letter.value}
+                                    points={letter.points}
+                                    letterClicked={this.letterClicked}
+                                    color={'aqua'}
+                                    recordLetter={this.recordLetter}
+                                />
+                            }
+                            {!this.state.nextArray.includes(index) &&
+                                <Tile 
+                                    key={index}
+                                    id={index}
+                                    value={letter.value}
+                                    points={letter.points}
+                                    letterClicked={this.letterClicked}
+                                    color={'pink'}
+                                    recordLetter={this.recordLetter}
+                                />
+                            }
+                        </div>
                     ))}
                 </div>
                 <div class={style.wordBox}
                     style={{
-                        paddingLeft: '20px',
-                        marginLeft: '20px',
                         height: '100%'
                     }}
                 >
