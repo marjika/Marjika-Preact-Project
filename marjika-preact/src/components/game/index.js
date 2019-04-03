@@ -17,6 +17,10 @@ class Game extends Component {
 
     }
 
+    reset() {
+        console.log("reset");
+    }
+
     chooseLetters = () => {
         const randomLetters = this.shuffle(this.state.randomIds);
         const letters= [];
@@ -55,6 +59,7 @@ class Game extends Component {
                 //     height: '100%'
                 // }}
             >
+                <button  onClick={(event) => { this.reset()}}>Reset</button>
                     <Board letters={this.state.letters}
 
                     ></Board>
