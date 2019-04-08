@@ -26,8 +26,8 @@ class Tile extends Component {
             if (id===13) {nextArray.push(8, 9, 10, 12, 14);}  //(x-5, x-4, x-3, x-1, x+1)
             if (id===14) {nextArray.push(9, 10, 11, 13, 15);} // (x-5, x-4, x-3, x-1, x+1)
             if (id===15) {nextArray.push(10, 11, 14);} // (x-5, x-4, x-1)
-            console.log(nextArray);
-            console.log(id, this.props.value);
+            //console.log(nextArray);
+            //console.log(id, this.props.value);
             return nextArray;
         }
     }
@@ -36,7 +36,7 @@ class Tile extends Component {
 
     return (
             <div class={style.tile}>
-                <button disabled={this.state.used} onClick={(event) => { this.props.recordLetter(this.props, this.letterClicked(this.props.id));}}
+                <button onClick={(event) => { this.props.recordLetter(this.props, this.letterClicked(this.props.id));}}
                     style={{
                         padding: 5,
                         margin: 5,
@@ -57,3 +57,5 @@ class Tile extends Component {
 };
 
 export default Tile;
+
+//disabled={this.state.used} 

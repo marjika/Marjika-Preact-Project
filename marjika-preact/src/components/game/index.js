@@ -17,8 +17,9 @@ class Game extends Component {
 
     }
 
-    reset() {
-        console.log("reset");
+
+    submit = (word) => {
+        console.log(word);
     }
 
     chooseLetters = () => {
@@ -59,9 +60,9 @@ class Game extends Component {
                 //     height: '100%'
                 // }}
             >
-                <button  onClick={(event) => { this.reset()}}>Reset</button>
-                    <Board letters={this.state.letters}
-
+                    <Board 
+                        letters={this.state.letters}
+                        submit={this.submit}
                     ></Board>
             </div>
         );

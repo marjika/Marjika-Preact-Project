@@ -9,18 +9,37 @@ class Board extends Component {
         letters : this.props.letters,
         pointTotal : 0,
         wordString : "",
-        nextArray : []
+        nextArray : [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], 
+        activeArr : [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     };
 
     recordLetter = (letter, arr) => {
-        console.log(arr);
-        const pointTotal = this.state.pointTotal + letter.points;
-        const wordString = this.state.wordString + letter.value;
-        const nextArray = arr;
-        this.setState({pointTotal : pointTotal});
-        this.setState({wordString : wordString});
-        this.setState({nextArray : nextArray});
-        //console.log(pointTotal);
+        if (this.state.activeArr[letter.id]===false && this.state.nextArray.includes(letter.id)) {
+            console.log(letter);
+            const activeArr = this.state.activeArr;
+            activeArr[letter.id] = true;
+            const pointTotal = this.state.pointTotal + letter.points;
+            const wordString = this.state.wordString + letter.value;
+            const nextArray = [];
+            arr.forEach(element => {
+                if (this.state.activeArr[element] === false) {
+                    nextArray.push(element);
+                }
+            });
+            this.setState({pointTotal : pointTotal});
+            this.setState({wordString : wordString});
+            this.setState({nextArray : nextArray});
+            this.setState({activeArr : activeArr});
+            console.log(nextArray);
+        }
+    }
+
+    reset = () => {
+        //this.setState({ letters : this.props.letters });
+        this.setState({ pointTotal : 0 });
+        this.setState({ wordString : "" });
+        this.setState({ nextArray : [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] });
+        this.setState({ activeArr : [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false] });
     }
 
     render() {
@@ -45,6 +64,7 @@ class Board extends Component {
                                     letterClicked={this.letterClicked}
                                     color={'aqua'}
                                     recordLetter={this.recordLetter}
+                                    active={true}
                                 />
                             }
                             {!this.state.nextArray.includes(index) &&
@@ -56,6 +76,7 @@ class Board extends Component {
                                     letterClicked={this.letterClicked}
                                     color={'pink'}
                                     recordLetter={this.recordLetter}
+                                    active={false}
                                 />
                             }
                         </div>
@@ -70,6 +91,8 @@ class Board extends Component {
                         points={this.state.pointTotal}
                         word={this.state.wordString}
                     />
+                    <button  onClick={(event) => { this.reset()}}>Reset</button>
+                    <button  onClick={(event) => { this.props.submit(this.state.wordString)}}>Submit</button>
                 </div>
             </div>
         );
