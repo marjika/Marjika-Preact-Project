@@ -2,7 +2,6 @@ import { Component } from 'preact';
 import style from './style';
 import Tile from '../tile';
 import WordBox from '../wordBox'
-//import letters from './letters.json';
 
 class Board extends Component {
     state={
@@ -15,7 +14,6 @@ class Board extends Component {
 
     recordLetter = (letter, arr) => {
         if (this.state.activeArr[letter.id]===false && this.state.nextArray.includes(letter.id)) {
-            console.log(letter);
             const activeArr = this.state.activeArr;
             activeArr[letter.id] = true;
             const pointTotal = this.state.pointTotal + letter.points;
@@ -30,12 +28,10 @@ class Board extends Component {
             this.setState({wordString : wordString});
             this.setState({nextArray : nextArray});
             this.setState({activeArr : activeArr});
-            console.log(nextArray);
         }
     }
 
     reset = () => {
-        //this.setState({ letters : this.props.letters });
         this.setState({ pointTotal : 0 });
         this.setState({ wordString : "" });
         this.setState({ nextArray : [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] });
@@ -64,7 +60,7 @@ class Board extends Component {
                                     letterClicked={this.letterClicked}
                                     color={'aqua'}
                                     recordLetter={this.recordLetter}
-                                    active={true}
+                                    active={this.state.activeArr[index]}
                                 />
                             }
                             {!this.state.nextArray.includes(index) &&
@@ -76,7 +72,7 @@ class Board extends Component {
                                     letterClicked={this.letterClicked}
                                     color={'pink'}
                                     recordLetter={this.recordLetter}
-                                    active={false}
+                                    active={this.state.activeArr[index]}
                                 />
                             }
                         </div>
